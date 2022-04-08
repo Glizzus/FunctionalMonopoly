@@ -1,6 +1,12 @@
-case class PropertiesGroup(val utilities: List[UtilityProperty],
-                          val railroads: List[RailRoadProperty],
-                          val colors: List[List[ColoredProperty]])
+case class PropertiesGroup(utilities: List[UtilityProperty],
+                          railroads: List[RailroadProperty],
+                           colors: List[ColoredProperty]) {
+
+
+
+
+
+}
 
 
 

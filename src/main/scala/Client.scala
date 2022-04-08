@@ -1,20 +1,17 @@
 import scala.annotation.tailrec
-import scala.collection.immutable.Queue
 
 object Client extends App {
 
-  @tailrec
-  def deckCheck(deck: Queue[Any]): Unit = {
-    if (deck.isEmpty)  println("Done")
-    else {
-      println(deck.head)
-      println("")
-      deckCheck(deck.dequeue._2) // Tuple indexing starts at 1? What the hell?
-    }
-  }
+  GameHandler.greet()
+  GameHandler.prompt()
+  GameHandler.handleInput()
 
-  deckCheck(Deck.generateChanceDeck())
-  println("")
-  deckCheck(Deck.generateCommDeck())
+
+  @tailrec
+  def gameLoop(player1: HumanPlayer, player2: RobotPlayer): Unit = {
+    GameHandler.prompt()
+    GameHandler.handleInput()
+    gameLoop(player1, player2)
+  }
 
 }

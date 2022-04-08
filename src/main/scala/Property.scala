@@ -6,6 +6,10 @@ trait Property extends Location {
   val isOwned: Boolean = false
   override val position: Int
 
+  override def toString: String = {
+    f"Title Deed\n$title"
+  }
+
 }
 
 
