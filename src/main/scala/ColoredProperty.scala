@@ -1,9 +1,12 @@
-case class ColoredProperty(override val title: String,
-                           override val position: Int,
-                           override val price: Int,
-                           override val mortgage: Int,
-                           override val isOwned: Boolean = false,
-                           color: String,
-                           rent: Rent) extends Property {
+trait ColoredProperty extends Property {
+
+  val title: String
+  val position: Int
+  val price: Int
+  val mortgage: Int
+  override val owner: Option[Player] = None
+  val rent: Rent
+  val houses: Int = 0
 
 }
+

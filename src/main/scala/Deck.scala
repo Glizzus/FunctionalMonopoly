@@ -5,6 +5,9 @@ object Deck {
   val communityChestDeck: Queue[CommunityChest] = generateCommDeck()
   val chanceDeck: Queue[Chance] = generateChanceDeck()
 
+  protected case class Chance(id: Int, description: String) {
+    override def toString: String = description
+  }
 
   // ALL CHANCE CARDS IN THE US VERSION OF MONOPOLY
   // -------------------------------------------------------------------------------------------------------------------
@@ -51,6 +54,9 @@ object Deck {
     Queue(shuffled: _*)
   }
 
+  protected case class CommunityChest(id: Int, description: String) {
+    override def toString: String = description
+  }
 
   //All COMMUNITY CHEST CARDS IN THE US VERSION OF MONOPOLY
   // -------------------------------------------------------------------------------------------------------------------

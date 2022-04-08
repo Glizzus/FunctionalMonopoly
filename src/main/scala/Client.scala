@@ -2,15 +2,18 @@ import scala.annotation.tailrec
 
 object Client extends App {
 
+  val player1 = new HumanPlayer()
+  val player2 = Player
+
   GameHandler.greet()
   GameHandler.prompt()
-  GameHandler.handleInput()
+  GameHandler.handleInput(player1)
 
 
   @tailrec
-  def gameLoop(player1: HumanPlayer, player2: RobotPlayer): Unit = {
+  def gameLoop(player1: HumanPlayer, player2: Player): Unit = {
     GameHandler.prompt()
-    GameHandler.handleInput()
+    GameHandler.handleInput(player1)
     gameLoop(player1, player2)
   }
 

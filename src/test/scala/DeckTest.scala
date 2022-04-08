@@ -1,5 +1,8 @@
 import org.scalatest.funsuite.AnyFunSuite
 
+import scala.annotation.tailrec
+import scala.collection.immutable.Queue
+
 class DeckTest extends AnyFunSuite {
 
   test("CommunityChest Queue should always have a size of 16") {
@@ -30,5 +33,18 @@ class DeckTest extends AnyFunSuite {
     assert(!deck1.equals(deck2))
   }
 
+
+  @tailrec
+  final def deckCheck(deck: Queue[Any]): Unit = {
+    if (deck.isEmpty)  println("Done")
+    else {
+      println(deck.head)
+      println("")
+      deckCheck(deck.dequeue._2) // Tuple indexing starts at 1? What the hell?
+    }
+  }
+
+  deckCheck(Deck.generateCommDeck())
+  deckCheck(Deck.generateChanceDeck())
 
 }

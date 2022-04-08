@@ -1,8 +1,8 @@
-case class RailroadProperty(override val title: String,
-                            override val position: Int,
+case class RailroadProperty(title: String,
+                            position: Int,
                             price: Int = 200,
                             mortgage: Int = 100,
-                            override val isOwned: Boolean = false) extends Property {
+                            override val owner: Option[Player] = None) extends Property {
 
     val rentWithOneRailroad: Int = 25
     val rentWithTwoRailroads: Int = 50

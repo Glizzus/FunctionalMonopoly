@@ -1,3 +1,4 @@
+
 import scala.annotation.tailrec
 import scala.io.StdIn.readLine
 
@@ -11,10 +12,16 @@ object GameHandler {
     println("[R]oll, [V]iew properties, [P]osition, [T]rade, [Quit]")
   }
 
-  def handleInput(): Unit = {
+  def handleInput(player: Player): Unit = {
     val input = getInput
-    val matched = inputMatcher(input)
+    val flag = inputMatcher(input)
+
+    val roll = rollHandler(flag)
+    showProperties(flag, player)
+
+
   }
+
 
   /**
    * This method gets and validates use input
@@ -22,16 +29,30 @@ object GameHandler {
    */
   @tailrec
   private def getInput: String = {
-    val input = readLine.toUpperCase.trim
+    val input = readLine().toUpperCase.trim
     input match {
-      case "R" | "V" | "P" | "T" => input
-      case "QUIT" =>
-        println("Goodbye")
-        sys.exit(0)
+      case "R" | "V" | "P" | "T" | "QUIT" => input
       case _ =>
         println("Error: Invalid input")
         prompt()
         getInput
+    }
+  }
+
+  private def rollHandler(flag: Int): Option[(Int, Boolean)] = {
+    flag match {
+      case 0 =>
+        val roll = rollDice
+        rollMessages(roll._1, roll._2)
+        Some(roll)
+      case _ => None
+    }
+  }
+
+  private def showProperties(flag: Int, player: Player): Unit = {
+    flag match {
+      case 1 => printProperties(player)
+      case _ =>
     }
   }
 
@@ -59,21 +80,24 @@ object GameHandler {
   }
 
 
+
+
   // IMPURE METHOD
   /**
    * Matches inputs to determine what to do with them
    * @param input the
    * @return this returns a dice roll for case "R", nothing for cases "V", "P" and a TradeManager for "T".
    */
-  private def inputMatcher(input: String): Either[Option[(Int, Boolean)], TradeManager] = {
-    input match {                                           // TODO: Make this return type less stupid
-      case "R" =>
-        val roll = rollDice
-        rollMessages(roll._1, roll._2)
-        Left(Some(roll)) // is this really less confusing than OOP?
-      case "V" => throw new UnsupportedOperationException
-      case "P" => throw new UnsupportedOperationException
-      case "T" => Right(TradeManager())
+  private def inputMatcher(input: String): Int = {
+    input match {
+      case "R" => 0
+      case "V" => 1
+      case "P" => 2
+      case "T" => 3
+      case "QUIT" =>
+        println("Goodbye.")
+        sys.exit(0)
+      case _ => throw new IllegalArgumentException
     }
   }
 
@@ -82,7 +106,7 @@ object GameHandler {
    * This calculates the new position on the board.
    * @return The position mapped to a legitimate position of a location.
    */
-  val newPosition: Int => Int = (pos) => pos % 40
+  def newPosition(pos: Int): Int = pos % 40 // there are 40 spots on a standard monopoly board
 
 
   // IMPURE METHOD
@@ -97,6 +121,20 @@ object GameHandler {
     val dice2 = random.nextInt(6) + 1
     (dice1 + dice2, dice1 == dice2)
   }
+
+
+  private def printProperties(player: Player): Unit = {
+    val utilities = player.properties.utilities
+    val railroads = player.properties.railroads
+    val coloredProperty = player.properties.colors
+    utilities.foreach(println)
+    railroads.foreach(println)
+    coloredProperty.foreach(println)
+  }
+
+
+
+
 }
 
 
