@@ -1,5 +1,9 @@
 import scala.collection.immutable.Queue
 
+/**
+ * This class represents the decks of Chance cards and Community Chest cards.
+ * Queues are chosen so that cards can be returned to the bottom of the deck after they are pulled
+ */
 object Deck {
 
   val communityChestDeck: Queue[CommunityChest] = generateCommDeck()
@@ -27,7 +31,10 @@ object Deck {
       + "\nIf owned, throw dice and pay owner a total ten times amount thrown.")
 
   val bankDiv: Chance = Chance(7, "Bank pays you dividend of $50.")
+
+  // This requires special treatment, as the player keeps this card until they use it
   val getOutJailChance: Chance = Chance(8, "Get out of Jail Free.")
+
   val goBackThree: Chance = Chance(9, "Go Back 3 Spaces.")
   val goToJailChance: Chance = Chance(10, "Go to Jail.\nGo directly to Jail, do not pass Go, do not collect $200.")
 
@@ -64,6 +71,8 @@ object Deck {
   val bankErr: CommunityChest = CommunityChest(1, "Bank error in your favor.\nCollect $200.")
   val docFee: CommunityChest = CommunityChest(2, "Doctor's fee.\nPay $50.")
   val saleStock: CommunityChest = CommunityChest(3, "From sale of stock you get $50.")
+
+  // This requires special treatment, as the player keeps this card until they use it
   val getOutJailComm: CommunityChest = CommunityChest(4, "Get Out of Jail Free.")
 
   val goToJailComm: CommunityChest = CommunityChest(5,

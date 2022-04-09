@@ -9,6 +9,7 @@ object Client extends App {
   GameHandler.prompt()
   GameHandler.handleInput(player1)
 
+  print(RailroadProperties.reading.toString)
 
   @tailrec
   def gameLoop(player1: HumanPlayer, player2: Player): Unit = {

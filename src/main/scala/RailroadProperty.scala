@@ -1,19 +1,15 @@
-case class RailroadProperty(title: String,
+case class RailroadProperty(override val title: String,
                             position: Int,
                             price: Int = 200,
                             mortgage: Int = 100,
                             override val owner: Option[Player] = None) extends Property {
 
-    val rentWithOneRailroad: Int = 25
-    val rentWithTwoRailroads: Int = 50
-    val rentWithThreeRailroads: Int = 100
-    val rentWithFourRailroads: Int = 200
-
-    val reading = new RailroadProperty("Reading Railroad", 5)
-    val pennsylvania = new RailroadProperty("Pennsylvania Railroad", 15)
-    val bAndO = new RailroadProperty("B & O Railroad", 25)
-    val shortLine = new RailroadProperty("Short Line Railroad", 35)
-
-
-
+  override def toString: String = {
+    super.toString +
+      "\n      Rent:   $25" +
+      "\nIf 2 R.R.'s are owned:   $50" +
+      "\nIf 3 R.R.'s are owned:   $100" +
+      "\nIf 4 R.R.'s are owned:   $200" +
+      "\n     Mortgage Value $100"
+  }
 }

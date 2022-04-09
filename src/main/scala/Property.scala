@@ -1,3 +1,6 @@
+/**
+ * A trait for all properties
+ */
 trait Property extends Location {
 
   val title: String
@@ -7,7 +10,7 @@ trait Property extends Location {
   val position: Int
 
   override def toString: String = {
-    f"Title Deed\n$title"
+    f"    ${title.toUpperCase}"
   }
 
 }

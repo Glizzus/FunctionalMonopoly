@@ -1,3 +1,9 @@
+/**
+ * A case class for defining a Player.
+ * @param money the amount of money that the player has
+ * @param position the position of the player
+ * @param properties all of the properties that the player owns
+ */
 case class Player(money: Int, position: Int, properties: PropertiesGroup) extends Location {
 
   def this() = {
@@ -41,5 +47,8 @@ case class Player(money: Int, position: Int, properties: PropertiesGroup) extend
   def giveMoney(deltaMoney: Int): Player = this.copy(money = money + deltaMoney)
 
   def isBankrupt: Boolean = this.money < 0
+
+  def moveBy(spaces: Int): Player = this.copy(position = position + spaces)
+
 
 }

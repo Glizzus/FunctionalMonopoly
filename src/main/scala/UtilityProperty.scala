@@ -4,13 +4,8 @@ case class UtilityProperty(title: String,
                            final val mortgage: Int = 75, // the default mortgage of both utility spaces
                            override val owner: Option[Player] = None) extends Property {
 
-  val bothUtilsOwned: Boolean = false
-
-  val defaultRentMultiplier: Int = 4
-  val bothUtilsMultiplier: Int = 10
-
-  val electricCompany: UtilityProperty = UtilityProperty("Electric Company", 12)
-  val waterWorks: UtilityProperty = UtilityProperty("Water Works", 28 )
-
-
+  override def toString: String = {
+    s"${super.toString}\nIf one Utility is owned rent is 4 times amount shown on dice.\n" +
+      "If both Utilities are owned rent is 10 times amount shown on dice" + "Mortgage Value: $75.00"
+  }
 }
